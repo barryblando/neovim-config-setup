@@ -10,6 +10,8 @@ configs.setup {
     "lua",
     "rust",
     "go",
+    "elixir",
+    "erlang",
     "graphql",
     "html",
     "http",
@@ -17,7 +19,11 @@ configs.setup {
     "json",
     "markdown",
     "typescript",
-    "yaml"
+    "yaml",
+    "css",
+    "scss",
+    "tsx",
+    "toml"
   },
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "" }, -- List of parsers to ignore installing
