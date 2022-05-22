@@ -122,6 +122,10 @@ cmp.setup {
   window = {
     documentation = {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+    -- if you want transparent background for completion menu
+    completion = {
+      winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
     }
   },
   experimental = {
