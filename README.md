@@ -22,7 +22,7 @@ brew install neovim
 
 ➡️  Remove or move your current `nvim` directory
  
-➡️  If you have packers.nvim installed remove it
+➡️  If you have packers.nvim installed , remove it
  
 ➡️  Clone
  
@@ -44,3 +44,7 @@ git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
 ```
 
 **IF ALL IS WELL. YOU'RE GOOD TO GO. GOOD LUCK, COMRADE!**
+
+## Sources
+
+➡️  [LSP Configuration List](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
