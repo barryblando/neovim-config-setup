@@ -13,7 +13,8 @@ bufferline.setup {
     -- NOTE: this plugin is designed with this icon in mind,
     -- and so changing this is NOT recommended, this is intended
     -- as an escape hatch for people who cannot bear it for whatever reason
-    indicator_icon = "▎",
+    -- indicator_icon = "▎",
+    indicator_icon = "",
     buffer_close_icon = "",
     -- buffer_close_icon = '',
     modified_icon = "●",
@@ -73,12 +74,14 @@ bufferline.setup {
   },
   highlights = {
     fill = {
-      guifg = { attribute = "fg", highlight = "#ff0000" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      -- guifg = { attribute = "bg", highlight = "Normal" },
+      -- guibg = { attribute = "fg", highlight = "StatusLineNC" },
+      guifg = "none",
+      guibg = "none",
     },
     background = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLine" },
     },
 
     -- buffer_selected = {
@@ -87,8 +90,8 @@ bufferline.setup {
     --   gui = 'none'
     --   },
     buffer_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLine" },
     },
 
     close_button = {
@@ -109,8 +112,8 @@ bufferline.setup {
       guibg = { attribute = "bg", highlight = "Normal" },
     },
     tab = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
     tab_close = {
       -- guifg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
