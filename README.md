@@ -22,7 +22,7 @@ brew install neovim
 
 ➡️  Remove or move your current `nvim` directory
  
-➡️  If you have packers.nvim installed , remove it
+➡️  If you have packers.nvim installed, remove it
  
 ➡️  Clone
  
