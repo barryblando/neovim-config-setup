@@ -93,6 +93,20 @@ nvim_tree.setup {
     number = false,
     relativenumber = false,
   },
+  renderer = {
+    indent_markers = {
+      enable = true,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+    },
+  },
   trash = {
     cmd = "trash",
     require_confirm = true,
