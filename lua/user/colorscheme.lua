@@ -10,3 +10,10 @@ catch /^Vim\%((\a\+)\)\=:E185/
   set background=dark
 endtry
 ]]
+
+-- Set bufferline bg transparent
+vim.cmd [[ highlight BufferLineFill guibg=NONE ]]
+-- Hide non-text from buffers i.e ~ (tilde)
+vim.cmd [[ set fillchars=eob:\ ]]
+-- Set statusline in nvim_tree transparent
+vim.cmd [[ highlight NvimTreeStatusLineNC guibg=nvim_treebg guifg=nvim_treebg ]]
