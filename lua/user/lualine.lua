@@ -20,7 +20,8 @@ local diagnostics = {
 local diff = {
 	"diff",
 	colored = false,
-	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+	-- symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+  symbols = {added = '+', modified = '~', removed = '-'},
   cond = hide_in_width
 }
 
@@ -68,18 +69,20 @@ end
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = require("user.lualineTheme").theme(),
+		-- theme = require("user.lualineTheme").theme(),
+		theme = "auto",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
+    globalstatus = false
 	},
 	sections = {
 		lualine_a = { mode },
-		lualine_b = { branch, diagnostics },
+		lualine_b = { branch, diff },
 		lualine_c = {},
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_x = { diff, spaces, "encoding", filetype },
+		lualine_x = { diagnostics, spaces, "encoding", filetype },
 		lualine_y = { location },
 	  lualine_z = { progress },
 	},
@@ -92,5 +95,7 @@ lualine.setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = {},
+	extensions = {
+    "nvim-tree"
+  }
 })
