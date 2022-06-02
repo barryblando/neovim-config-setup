@@ -12,16 +12,26 @@ local diagnostics = {
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
 	symbols = { error = " ", warn = " " },
-	colored = false,
-	update_in_insert = false,
+	colored = true,
+	update_in_insert = true,
 	always_visible = true,
 }
 
 local diff = {
-	"diff",
-	colored = false,
-	-- symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-  symbols = {added = '+', modified = '~', removed = '-'},
+  "diff",
+  colored = true, -- Displays a colored diff status if set to true
+  diff_color = {
+    -- Same color values as the general color option can be used here.
+    adadded  = 'DiffAdd',    -- Changes the diff's added color
+    modified = 'DiffChange', -- Changes the diff's modified color
+    removed  = 'DiffDelete', -- Changes the diff's removed color you
+  },
+  -- symbols = {added = '+', modified = ' ~', removed = ' -'}, -- Changes the symbols used by the diff.
+  symbols = {added = " ", modified = "  ", removed = "  "}, -- Changes the symbols used by the diff.
+  source = nil, -- A function that works as a data source for diff.
+                -- It must return a table as such:
+                --   { added = add_count, modified = modified_count, removed = removed_count }
+                -- or nil on failure. count <= 0 won't be displayed.
   cond = hide_in_width
 }
 
@@ -33,9 +43,28 @@ local mode = {
 }
 
 local filetype = {
-	"filetype",
-	icons_enabled = false,
-	icon = nil,
+  "filetype",
+  colored = true,   -- Displays filetype icon in color if set to true
+  icon_only = false, -- Display only an icon for filetype
+  icon = { align = 'left' }, -- Display filetype icon on the right hand side
+  -- icon =    {'X', align='right'}
+  -- Icon string ^ in table is ignored in filetype component
+}
+
+local filename = {
+  'filename',
+  file_status = true,      -- Displays file status (readonly status, modified status)
+  path = 2,                -- 0: Just the filename
+                           -- 1: Relative path
+                           -- 2: Absolute path
+                           -- 3: Absolute path, with tilde as the home directory
+  shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                           -- for other components. (terrible name, any suggestions?)
+  symbols = {
+    modified = '[+]',      -- Text to show when the file is modified.
+    readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+    unnamed = '[No Name]', -- Text to show for unnamed buffers.
+  }
 }
 
 local branch = {
@@ -71,7 +100,8 @@ lualine.setup({
 		icons_enabled = true,
 		-- theme = require("user.lualineTheme").theme(),
 		theme = "auto",
-		component_separators = { left = "", right = "" },
+		-- component_separators = { left = "", right = "" },
+    component_separators = { left = '', right = '' },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
@@ -89,8 +119,8 @@ lualine.setup({
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
+		lualine_c = {},
+		lualine_x = { filename, location },
 		lualine_y = {},
 		lualine_z = {},
 	},
