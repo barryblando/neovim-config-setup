@@ -64,7 +64,7 @@ bufferline.setup {
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
+    separator_style = "", -- | "thick" | "thin" | { 'any', 'any' },
     enforce_regular_tabs = true,
     always_show_bufferline = true,
     -- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
@@ -81,7 +81,7 @@ bufferline.setup {
     },
     background = {
       guifg = { attribute = "fg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "StatusLine" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
 
     -- buffer_selected = {
@@ -91,16 +91,16 @@ bufferline.setup {
     --   },
     buffer_visible = {
       guifg = { attribute = "fg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "StatusLine" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
 
     close_button = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
     close_button_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
     -- close_button_selected = {
     --   guifg = {attribute='fg',highlight='TabLineSel'},
@@ -108,8 +108,8 @@ bufferline.setup {
     --   },
 
     tab_selected = {
-      guifg = { attribute = "fg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "Normal" },
+      guifg = { attribute = "fg", highlight = "bold" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
     tab = {
       guifg = { attribute = "fg", highlight = "Normal" },
@@ -117,8 +117,9 @@ bufferline.setup {
     },
     tab_close = {
       -- guifg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
-      guifg = { attribute = "fg", highlight = "TabLineSel" },
-      guibg = { attribute = "bg", highlight = "Normal" },
+      -- guifg = { attribute = "fg", highlight = "TabLineSel" },
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
 
     duplicate_selected = {
@@ -151,20 +152,22 @@ bufferline.setup {
     },
 
     separator = {
-      guifg = { attribute = "bg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
+      guifg = { attribute = "bg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
     separator_selected = {
       guifg = { attribute = "bg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "StatusLineNC" },
     },
     -- separator_visible = {
     --   guifg = {attribute='bg',highlight='TabLine'},
     --   guibg = {attribute='bg',highlight='TabLine'}
     --   },
     indicator_selected = {
-      guifg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-      guibg = { attribute = "bg", highlight = "Normal" },
+      -- guifg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
+      -- guibg = { attribute = "bg", highlight = "Normal" },
+      guifg = "none",
+      guibg = "none"
     },
   },
 }
