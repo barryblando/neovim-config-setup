@@ -6,15 +6,20 @@ end
 local lspconfig = require("lspconfig")
 
 local servers = {
+  "bashls",
+  "denols",
   "dockerls",
-  "dotls",
   "html",
   "gopls",
+  "graphql",
+  "prismals",
   "rust_analyzer",
   "tailwindcss",
   "yamlls",
   "cssls",
   "tsserver",
+  "terraformls",
+  "taplo",
   "jsonls",
   "sumneko_lua"
 }
