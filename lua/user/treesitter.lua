@@ -18,6 +18,8 @@ configs.setup {
     "graphql",
     "http",
     "json",
+    "make",
+    "proto",
     "markdown",
     "html",
     "css",
