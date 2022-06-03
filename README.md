@@ -43,8 +43,28 @@ git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
 :checkhealth
 ```
 
+➡️  Install the following language servers:
+
+```
+npm i -g 
+  bash-language-server
+  dockerfile-language-server-nodejs
+  diagnostic-languageserver
+  @tailwindcss/language-server
+  yaml-language-server
+  vscode-langservers-extracted
+  typescript typescript-language-server
+  graphql-language-service-cli
+  @prisma/language-server
+
+cargo install --locked taplo-cli
+
+brew install hashicorp/tap/terraform-ls
+```
+
 **IF ALL IS WELL. YOU'RE GOOD TO GO. GOOD LUCK, COMRADE!**
 
 ## Sources
 
-➡️  [LSP Configuration List](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+- [LSP Configuration List](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+- [Terraform LS Installation](https://github.com/hashicorp/terraform-ls/blob/main/docs/installation.md)
