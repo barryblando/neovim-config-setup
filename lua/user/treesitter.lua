@@ -6,16 +6,16 @@ end
 configs.setup {
   -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
-    "c",
+    "bash",
+    "dockerfile",
     "lua",
     "rust",
     "go",
-    "erlang",
-    "elixir",
     "javascript",
     "typescript",
     "tsx",
     "graphql",
+    "prisma",
     "http",
     "json",
     "make",
