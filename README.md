@@ -1,6 +1,6 @@
 # WSL2 NEOVIM CONFIG
 
-![screenshot](https://user-images.githubusercontent.com/5582213/169658061-0aeb51d8-d564-4587-a12e-3f7d43101284.jpg)
+![screenshot](https://user-images.githubusercontent.com/5582213/172272120-ed57d963-5c08-4c56-9d00-6ffd5430ad94.png)
 
 [Follow this Playlist from Christian Chiarulli for Guides](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ).
 
@@ -41,6 +41,8 @@ git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
 
 ```
 :checkhealth
+
+-- If you found errors just follow the instructions there
 ```
 
 ➡️  Install the following language servers:
