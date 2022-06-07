@@ -67,6 +67,7 @@ return packer.startup(function(use)
   use "terryma/vim-multiple-cursors"
   use { 'echasnovski/mini.nvim', branch = 'stable' }
   use "wakatime/vim-wakatime"
+  use "p00f/nvim-ts-rainbow"
   -- use {'jdhao/better-escape.vim', event = 'InsertEnter'}
   -- use "rcarriga/nvim-notify"
 
