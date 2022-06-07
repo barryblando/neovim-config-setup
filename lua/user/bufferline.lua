@@ -15,7 +15,7 @@ bufferline.setup {
     -- as an escape hatch for people who cannot bear it for whatever reason
     -- indicator_icon = "▎",
     indicator_icon = "",
-    buffer_close_icon = "",
+    buffer_close_icon = "x",
     -- buffer_close_icon = '',
     modified_icon = "●",
     close_icon = "",
@@ -56,7 +56,13 @@ bufferline.setup {
     --     return true
     --   end
     -- end,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "",
+        padding = 1
+      }
+    },
     show_buffer_icons = true,
     show_buffer_close_icons = true,
     show_close_icon = true,
