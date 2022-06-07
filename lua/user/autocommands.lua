@@ -19,6 +19,12 @@ vim.cmd [[
     autocmd FileType markdown setlocal spell
   augroup end
 
+  augroup _json
+    autocmd!
+    autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
+    autocmd BufNewFile,BufRead tsconfig.*.json setlocal filetype=jsonc
+  augroup end
+  
   augroup _auto_resize
     autocmd!
     autocmd VimResized * tabdo wincmd = 
