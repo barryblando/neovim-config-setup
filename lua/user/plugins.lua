@@ -66,12 +66,14 @@ return packer.startup(function(use)
   use "folke/which-key.nvim"
   use "terryma/vim-multiple-cursors"
   use { 'echasnovski/mini.nvim', branch = 'stable' }
+  use "wakatime/vim-wakatime"
   -- use {'jdhao/better-escape.vim', event = 'InsertEnter'}
   -- use "rcarriga/nvim-notify"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "Mofiqul/vscode.nvim"
+  use "sainnhe/gruvbox-material"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
