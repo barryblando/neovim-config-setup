@@ -3,6 +3,21 @@ if not status_ok then
   return
 end
 
+local parsers = require("nvim-treesitter.parsers")
+local enabled_list = {
+  "lua",
+  "rust",
+  "go",
+  "javascript",
+  "typescript",
+  "tsx",
+  "graphql",
+  "prisma",
+  "proto",
+  "css",
+  "scss"
+}
+
 configs.setup {
   -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
@@ -53,6 +68,21 @@ configs.setup {
     enable = true, -- false will disable the whole extension
     disable = { "" }, -- list of language that will be disabled
     additional_vim_regex_highlighting = true,
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+    disable = vim.tbl_filter(
+      function(p)
+        local disable = true
+        for _, lang in pairs(enabled_list) do
+          if p==lang then disable = false end
+        end
+        return disable
+      end,
+      parsers.available_parsers()
+    )
   },
   indent = { enable = true, disable = { "yaml" } },
   context_commentstring = {
