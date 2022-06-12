@@ -39,6 +39,7 @@ M.setup = function()
   -- Hover rounded border with transparency effect from cmp
   local function custom_handler(handler)
     local overrides = { border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" } }
+    -- border = { "┏", "━", "┓", "┃", "┛","━", "┗", "┃" },
     return vim.lsp.with(function(...)
       local buf, winnr = handler(...)
       if buf then
