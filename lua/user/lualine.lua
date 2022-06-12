@@ -1,7 +1,15 @@
 local status_ok, lualine = pcall(require, "lualine")
+local gps_status_ok, gps = pcall(require, "nvim-gps")
+
 if not status_ok then
-	return
+  return
 end
+
+if not gps_status_ok then
+  return
+end
+
+local icons = require "user.icons"
 
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
@@ -11,7 +19,7 @@ local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
+	symbols = { error = icons.diagnostics.Error, warn = icons.diagnostics.Warning },
 	colored = false,
 	update_in_insert = true,
 	always_visible = true,
@@ -19,26 +27,35 @@ local diagnostics = {
 
 local diff = {
   "diff",
-  colored = false, -- Displays a colored diff status if set to true
+  colored = false,
   diff_color = {
     -- Same color values as the general color option can be used here.
     adadded  = 'DiffAdd',    -- Changes the diff's added color
     modified = 'DiffChange', -- Changes the diff's modified color
     removed  = 'DiffDelete', -- Changes the diff's removed color you
   },
-  -- symbols = {added = '+', modified = ' ~', removed = ' -'}, -- Changes the symbols used by the diff.
-  symbols = {added = " ", modified = " ", removed = " "}, -- Changes the symbols used by the diff.
-  source = nil, -- A function that works as a data source for diff.
-                -- It must return a table as such:
-                --   { added = add_count, modified = modified_count, removed = removed_count }
-                -- or nil on failure. count <= 0 won't be displayed.
+  symbols = {
+    added = icons.git.Add,
+    modified = icons.git.Mod,
+    removed = icons.git.Remove
+  }, -- Changes the symbols used by the diff.
+  source = function ()
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+      return {
+        added = gitsigns.added,
+        modified = gitsigns.changed,
+        removed = gitsigns.removed
+      }
+    end
+  end,
   cond = hide_in_width
 }
 
 local mode = {
 	"mode",
 	fmt = function(str)
-		return "-- " .. str .. " --"
+		return "  " .. str .. "  "
 	end,
 }
 
@@ -101,16 +118,24 @@ lualine.setup({
 		-- theme = require("user.lualineTheme").theme(),
 		theme = "auto",
 		-- component_separators = { left = "", right = "" },
-    component_separators = { left = '', right = '|' },
-		section_separators = { left = "", right = "" },
+    component_separators = {
+      left = "",
+      right = ""
+    },
+		section_separators = {
+      left = icons.ui.TriangleRight,
+      right = icons.ui.TriangleLeft
+    },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
-    globalstatus = false
+    globalstatus = true
 	},
 	sections = {
 		lualine_a = { mode },
 		lualine_b = { branch, diff },
-		lualine_c = {},
+		lualine_c = {
+      { gps.get_location, cond = gps.is_available }
+    },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diagnostics, spaces, "encoding", filetype },
 		lualine_y = { location },
