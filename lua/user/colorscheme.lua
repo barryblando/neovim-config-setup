@@ -5,7 +5,7 @@
 
 -- vim.cmd [[
 -- try
---   colorscheme vscode 
+--   colorscheme vscode
 -- catch /^Vim\%((\a\+)\)\=:E185/
 --   colorscheme default
 --   set background=dark
@@ -42,9 +42,6 @@ vim.cmd [[ highlight BufferLineFill guibg=NONE ]]
 -- Hide non-text from buffers i.e ~ (tilde)
 vim.cmd [[ set fillchars=eob:\ ]]
 -- Set statusline in nvim_tree transparent
--- vim.cmd [[ highlight NvimTreeStatusLineNC guibg=nvim_treebg guifg=nvim_treebg ]]
-
-
 vim.cmd([[
   hi StatusLine gui=NONE guibg=NonText guisp=NonText
   hi StatusLineNc gui=NONE guibg=NonText guisp=NonText
