@@ -5,6 +5,7 @@ end
 
 local parsers = require("nvim-treesitter.parsers")
 local enabled_list = {
+  "bash",
   "lua",
   "rust",
   "go",
