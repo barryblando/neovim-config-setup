@@ -40,43 +40,90 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- Plugins here
-  use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "windwp/nvim-ts-autotag"
-  use "numToStr/Comment.nvim" -- Easily comment stuff
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
-  }
-  use "akinsho/bufferline.nvim"
-  -- use "noib3/nvim-cokeline"
-  use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
-  use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
-  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim"
-  use "terryma/vim-multiple-cursors"
-  use { 'echasnovski/mini.nvim', branch = 'stable' }
-  use "wakatime/vim-wakatime"
-  use "p00f/nvim-ts-rainbow"
-  -- use {'jdhao/better-escape.vim', event = 'InsertEnter'}
-  -- use "rcarriga/nvim-notify"
+  ---------------------
+  -- Setup Utilities --
+  ---------------------
 
-  -- Colorschemes
+  -- Have packer manage itself
+  use "wbthomason/packer.nvim"
+
+  -- An implementation of the Popup API from vim in Neovim
+  use "nvim-lua/popup.nvim"
+
+  -- Useful lua functions used by lots of plugins
+  use "nvim-lua/plenary.nvim"
+
+  -- Dev Icons also required (for me)
+  use "kyazdani42/nvim-web-devicons"
+
+  -- Easily comment stuff
+  use "numToStr/Comment.nvim"
+
+  -- File Explorer
+  use "kyazdani42/nvim-tree.lua"
+
+  -- Tabs
+  use "akinsho/bufferline.nvim"
+
+  -- Closing buffers
+  use "moll/vim-bbye"
+
+  -- Statusline
+  use "nvim-lualine/lualine.nvim"
+
+  -- Floating terminals
+  use "akinsho/toggleterm.nvim"
+
+  -- Project management
+  use "ahmedkhalf/project.nvim"
+
+  -- Speeding up startup
+  use "lewis6991/impatient.nvim"
+
+  -- Indentation Guides
+  use "lukas-reineke/indent-blankline.nvim"
+
+  -- Alpha Menu
+  use "goolord/alpha-nvim"
+
+  -- This is need to fix lsp doc highlight
+  use "antoinemadec/FixCursorHold.nvim"
+
+  -- Which Key Menu
+  use "folke/which-key.nvim"
+
+  -- For jumping cursor in every word
+  use "unblevable/quick-scope"
+
+  -- Easy motion. Crazy fast jumping cursor
+  use "phaazon/hop.nvim"
+
+  -- Multiple Select Cursor
+  use "terryma/vim-multiple-cursors"
+
+  -- Collection of minimal, independent, and fast Lua modules dedicated to improve Neovim
+  -- Use for surround
+  use { 'echasnovski/mini.nvim', branch = 'stable' }
+
+  -- Tracking Code stats
+  use "wakatime/vim-wakatime"
+
+  -- code structure "breadcrumb"
+  use "SmiteshP/nvim-gps"
+
+  -- Todo Comments
+  use { "folke/todo-comments.nvim" }
+
+  ---------------------
+  --  COLOR SCHEMES  --
+  ---------------------
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "Mofiqul/vscode.nvim"
   use "sainnhe/gruvbox-material"
 
-  -- cmp plugins
+  ---------------------
+  -- AUTO COMPLETION --
+  ---------------------
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
@@ -84,28 +131,62 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
 
-  -- snippets
+  ---------------------
+  --    SNIPPETS     --
+  ---------------------
+
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
+  ---------------------
+  --      LSP        --
+  ---------------------
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
-  -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  use "RRethy/vim-illuminate"
 
+  ---------------------
+  --    Telescope    --
+  ---------------------
+
+  use "nvim-telescope/telescope.nvim"
+  use "nvim-telescope/telescope-media-files.nvim"
+  use "nvim-telescope/telescope-ui-select.nvim"
+  use "nvim-telescope/telescope-file-browser.nvim"
+
+  ---------------------
+  --   TREESITTER    --
+  ---------------------
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  use "p00f/nvim-ts-rainbow"
+  use "windwp/nvim-autopairs"
+  use "windwp/nvim-ts-autotag"
 
-  -- Git
+  ---------------------
+  --      GIT        --
+  ---------------------
   use "lewis6991/gitsigns.nvim"
+
+  ---------------------
+  --   EXPIREMENT    --
+  ---------------------
+  -- Plugins to Experiment in spare time
+  -- use "ThePrimeagen/refactoring.nvim"
+  -- use {'jdhao/better-escape.vim', event = 'InsertEnter'}
+  -- use "rcarriga/nvim-notify"
+  -- use "norcalli/nvim-colorizer.lua"
+  -- use "nvim-pack/nvim-spectre"
+  -- use "ray-x/lsp_signature.nvim"
+  -- use { "michaelb/sniprun", run = "bash ./install.sh" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
