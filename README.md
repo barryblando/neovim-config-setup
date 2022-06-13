@@ -1,6 +1,6 @@
 # WSL2 NEOVIM CONFIG
 
-![screenshot](https://user-images.githubusercontent.com/5582213/172284009-30bb3339-86ee-46a0-bb70-416e29c97c40.png)
+![screenshot](https://user-images.githubusercontent.com/5582213/173373377-0246d134-7336-4eae-a8e3-8a44f751b03a.png)
 
 [Follow this Playlist from Christian Chiarulli for Guides](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ).
 
