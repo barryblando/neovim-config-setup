@@ -31,14 +31,16 @@ end
 packer.init {
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+      return require("packer.util").float {
+        border = { "┏", "━", "┓", "┃", "┛","━", "┗", "┃" },
+      }
     end,
   },
 }
 
 -- Install your plugins here
 return packer.startup(function(use)
-    -- Load lua path
+  -- Load lua path
   local lua_path = function(name)
     return string.format("require'plugins.%s'", name)
   end
@@ -102,14 +104,13 @@ return packer.startup(function(use)
   -- Indentation Guides
   use {
     "lukas-reineke/indent-blankline.nvim",
-    after = "nvim-treesitter",
     config = lua_path"indent-blankline"
   }
 
   -- Alpha Menu
   use { "goolord/alpha-nvim", config = lua_path"alpha" }
 
-  -- This is need to fix lsp doc highlight
+  -- This is need to fix some plugins cursor problems
   use "antoinemadec/FixCursorHold.nvim"
 
   -- Which Key Menu
@@ -138,8 +139,9 @@ return packer.startup(function(use)
   --  COLOR SCHEMES  --
   ---------------------
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use "Mofiqul/vscode.nvim"
   use "sainnhe/gruvbox-material"
+
+  use { "norcalli/nvim-colorizer.lua", config = lua_path"colorizer" }
 
   ---------------------
   -- AUTO COMPLETION --
@@ -161,12 +163,29 @@ return packer.startup(function(use)
   ---------------------
   --      LSP        --
   ---------------------
-  -- LSP
+
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
+  -- Function signature
+  use "ray-x/lsp_signature.nvim"
+
+  -- LSP progress indicator
+  use({
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup({
+        window = {
+          relative = "editor",
+          blend = 0,
+        },
+      })
+    end,
+  })
+
+  -- Use as document highlight
   use "RRethy/vim-illuminate"
 
   ---------------------
@@ -184,9 +203,28 @@ return packer.startup(function(use)
 
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = lua_path"nvim-treesitter" }
   use "JoosepAlviste/nvim-ts-context-commentstring"
-  use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
+  use { "p00f/nvim-ts-rainbow" }
   use { "windwp/nvim-autopairs", config = lua_path"nvim-autopairs" }
-  use { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }
+  use { "windwp/nvim-ts-autotag" }
+
+  -- Treesitter text dimming
+  use({
+    "folke/twilight.nvim",
+    cmd = { "Twilight" },
+    setup = function()
+      vim.keymap.set("n", "<C-z>", "<Cmd>Twilight<CR>", { desc = "dim inactive surroundings" })
+    end,
+    config = function()
+      require("twilight").setup()
+      -- TEMP: transparent background issue #15
+      local tw_config = require("twilight.config")
+      local tw_colors = tw_config.colors
+      tw_config.colors = function(...)
+        tw_colors(...)
+        vim.cmd("hi! Twilight guibg=NONE")
+      end
+    end,
+  })
 
   -- code structure "breadcrumb"
   use { "SmiteshP/nvim-gps", config = lua_path"nvim-gps" }
@@ -203,11 +241,8 @@ return packer.startup(function(use)
 
   -- Plugins to Experiment in spare time
   -- use "ThePrimeagen/refactoring.nvim"
-  -- use {'jdhao/better-escape.vim', event = 'InsertEnter'}
   -- use "rcarriga/nvim-notify"
-  -- use "norcalli/nvim-colorizer.lua"
   -- use "nvim-pack/nvim-spectre"
-  -- use "ray-x/lsp_signature.nvim"
   -- use { "michaelb/sniprun", run = "bash ./install.sh" }
 
   -- Automatically set up your configuration after cloning packer.nvim
