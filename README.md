@@ -22,7 +22,7 @@ brew install neovim
 
 - Remove current `~/.config/nvim` directory
  
-- If you have packers.nvim installed, remove it
+- If you have packers.nvim installed, remove `.local\share\nvim\site\pack`
  
 - Clone
  
