@@ -2,7 +2,6 @@ local M = {}
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- TODO: backfill this to template
 M.setup = function()
   local icons = require "plugins.icons"
 
@@ -55,7 +54,6 @@ M.setup = function()
 
   -- wrapped open_float to inspect diagnostics and use the severity color for border
   -- https://neovim.discourse.group/t/lsp-diagnostics-how-and-where-to-retrieve-severity-level-to-customise-border-color/1679
-  -- TODO: find a way to extract winnr to make transparency effect(not winblend) happen
   vim.diagnostic.open_float = (function(orig)
     return function(bufnr, opts)
       local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
