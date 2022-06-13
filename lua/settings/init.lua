@@ -1,0 +1,7 @@
+require "settings.options"
+require "settings.keymaps"
+require "settings.completion"
+require "settings.autocommands"
+require "settings.illuminate"
+require "settings.quickscope"
+require "settings.multi-cursor"

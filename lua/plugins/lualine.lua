@@ -9,7 +9,7 @@ if not gps_status_ok then
   return
 end
 
-local icons = require "user.icons"
+local icons = require "plugins.icons"
 
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80

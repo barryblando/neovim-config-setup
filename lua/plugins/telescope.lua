@@ -5,7 +5,7 @@ end
 
 local actions = require "telescope.actions"
 telescope.load_extension "media_files"
-local icons = require("user.icons")
+local icons = require("plugins.icons")
 
 local fb_actions = require "telescope".extensions.file_browser.actions
 

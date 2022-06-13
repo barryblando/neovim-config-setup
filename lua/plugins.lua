@@ -16,12 +16,10 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "plugins.lua",
+  command = "source <afile> | PackerSync",
+})
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -40,6 +38,11 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
+    -- Load lua path
+  local lua_path = function(name)
+    return string.format("require'plugins.%s'", name)
+  end
+
   ---------------------
   -- Setup Utilities --
   ---------------------
@@ -54,65 +57,82 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   -- Dev Icons also required (for me)
-  use "kyazdani42/nvim-web-devicons"
+  use { "kyazdani42/nvim-web-devicons", config = lua_path"nvim-web-devicons" }
 
   -- Easily comment stuff
-  use "numToStr/Comment.nvim"
+  use { "numToStr/Comment.nvim", config = lua_path"comment" }
 
   -- File Explorer
-  use "kyazdani42/nvim-tree.lua"
+  use { "kyazdani42/nvim-tree.lua", config = lua_path"nvim-tree" }
 
   -- Tabs
-  use "akinsho/bufferline.nvim"
+  use { "akinsho/bufferline.nvim", config = lua_path"bufferline" }
 
   -- Closing buffers
   use "moll/vim-bbye"
 
   -- Statusline
-  use "nvim-lualine/lualine.nvim"
+  use { "nvim-lualine/lualine.nvim", config = lua_path"lualine" }
 
   -- Floating terminals
-  use "akinsho/toggleterm.nvim"
+  use { "akinsho/toggleterm.nvim", config = lua_path"toggleterm" }
 
   -- Project management
-  use "ahmedkhalf/project.nvim"
+  use { "ahmedkhalf/project.nvim", config = lua_path"project" }
 
   -- Speeding up startup
-  use "lewis6991/impatient.nvim"
+  use({
+    "lewis6991/impatient.nvim",
+    config = function()
+      local impatient = require("impatient")
+      impatient.enable_profile()
+    end,
+  })
+
+  -- Remove mapping escape delay
+  use({
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup({
+        mapping = { "jk", "kj" },
+      })
+    end,
+  })
 
   -- Indentation Guides
-  use "lukas-reineke/indent-blankline.nvim"
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    after = "nvim-treesitter",
+    config = lua_path"indent-blankline"
+  }
 
   -- Alpha Menu
-  use "goolord/alpha-nvim"
+  use { "goolord/alpha-nvim", config = lua_path"alpha" }
 
   -- This is need to fix lsp doc highlight
   use "antoinemadec/FixCursorHold.nvim"
 
   -- Which Key Menu
-  use "folke/which-key.nvim"
+  use { "folke/which-key.nvim", config = lua_path"which-key" }
 
   -- For jumping cursor in every word
   use "unblevable/quick-scope"
 
   -- Easy motion. Crazy fast jumping cursor
-  use "phaazon/hop.nvim"
+  use { "phaazon/hop.nvim", config = lua_path"hop" }
 
   -- Multiple Select Cursor
   use "terryma/vim-multiple-cursors"
 
   -- Collection of minimal, independent, and fast Lua modules dedicated to improve Neovim
   -- Use for surround
-  use { 'echasnovski/mini.nvim', branch = 'stable' }
+  use { 'echasnovski/mini.nvim', branch = 'stable', config = lua_path"mini" }
 
   -- Tracking Code stats
   use "wakatime/vim-wakatime"
 
-  -- code structure "breadcrumb"
-  use "SmiteshP/nvim-gps"
-
   -- Todo Comments
-  use { "folke/todo-comments.nvim" }
+  use { "folke/todo-comments.nvim", config = lua_path"todo-comments" }
 
   ---------------------
   --  COLOR SCHEMES  --
@@ -153,7 +173,7 @@ return packer.startup(function(use)
   --    Telescope    --
   ---------------------
 
-  use "nvim-telescope/telescope.nvim"
+  use { "nvim-telescope/telescope.nvim", config = lua_path"telescope" }
   use "nvim-telescope/telescope-media-files.nvim"
   use "nvim-telescope/telescope-ui-select.nvim"
   use "nvim-telescope/telescope-file-browser.nvim"
@@ -161,24 +181,26 @@ return packer.startup(function(use)
   ---------------------
   --   TREESITTER    --
   ---------------------
-  -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
+
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = lua_path"nvim-treesitter" }
   use "JoosepAlviste/nvim-ts-context-commentstring"
-  use "p00f/nvim-ts-rainbow"
-  use "windwp/nvim-autopairs"
-  use "windwp/nvim-ts-autotag"
+  use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
+  use { "windwp/nvim-autopairs", config = lua_path"nvim-autopairs" }
+  use { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }
+
+  -- code structure "breadcrumb"
+  use { "SmiteshP/nvim-gps", config = lua_path"nvim-gps" }
 
   ---------------------
   --      GIT        --
   ---------------------
-  use "lewis6991/gitsigns.nvim"
+
+  use { "lewis6991/gitsigns.nvim", config = lua_path"gitsigns" }
 
   ---------------------
   --   EXPIREMENT    --
   ---------------------
+
   -- Plugins to Experiment in spare time
   -- use "ThePrimeagen/refactoring.nvim"
   -- use {'jdhao/better-escape.vim', event = 'InsertEnter'}

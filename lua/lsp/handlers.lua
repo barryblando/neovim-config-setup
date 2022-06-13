@@ -4,7 +4,7 @@ M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- TODO: backfill this to template
 M.setup = function()
-  local icons = require "user.icons"
+  local icons = require "plugins.icons"
 
   local signs = {
     { name = "DiagnosticSignError", text = icons.diagnostics.Error },
