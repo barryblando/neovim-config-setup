@@ -1,17 +1,4 @@
--- vim.opt.termguicolors = true
--- vim.g.vscode_style = "dark"
--- vim.g.vscode_transparent = 1
--- vim.g.vscode_disable_nvimtree_bg = true
-
--- vim.cmd [[
--- try
---   colorscheme vscode
--- catch /^Vim\%((\a\+)\)\=:E185/
---   colorscheme default
---   set background=dark
--- endtry
--- ]]
-
+-- Gruvbox Config
 vim.cmd [[
   " Important!! https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt
   if has('termguicolors')
@@ -39,10 +26,22 @@ vim.cmd [[
 
 -- Set bufferline bg transparent
 vim.cmd [[ highlight BufferLineFill guibg=NONE ]]
+
 -- Hide non-text from buffers i.e ~ (tilde)
 vim.cmd [[ set fillchars=eob:\ ]]
+
 -- Set statusline in nvim_tree transparent
 vim.cmd([[
   hi StatusLine gui=NONE guibg=NonText guisp=NonText
   hi StatusLineNc gui=NONE guibg=NonText guisp=NonText
+]])
+
+-- Make Float have transparency effect not blend
+vim.cmd([[
+  hi ErrorFloat guibg=NONE
+  hi WarningFloat guibg=NONE
+  hi InfoFloat guibg=NONE
+  hi HintFloat guibg=NONE
+  hi NormalFloat guifg=NONE guibg=NONE
+  hi FloatBorder guifg=NONE guibg=NONE
 ]])
