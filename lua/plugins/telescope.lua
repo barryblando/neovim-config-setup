@@ -102,8 +102,8 @@ telescope.setup {
     },
     file_browser = {
       require("telescope.themes").get_dropdown {
-          previewer = false,
-          -- even more opts
+        previewer = false,
+        -- even more opts
       },
       -- set this to true if you don't have any file explorer plugin installed when starting nvim
       hijack_netrw = false,
@@ -130,15 +130,15 @@ telescope.setup {
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
     },
-    -- ["ui-select"] = {
-    --   require("telescope.themes").get_dropdown {
-    --     previewer = false,
-    --     -- even more opts
-    --   },
-    -- },
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        previewer = false,
+        -- even more opts
+      },
+    },
   },
 }
 
--- telescope.load_extension "ui-select"
+telescope.load_extension "ui-select"
 telescope.load_extension "file_browser"
 telescope.load_extension "fzf"
