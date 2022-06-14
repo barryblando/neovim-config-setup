@@ -47,6 +47,7 @@ npm i -g
   typescript typescript-language-server
   graphql-language-service-cli
   @prisma/language-server
+  emmet-ls
 
 cargo install --locked taplo-cli
 
