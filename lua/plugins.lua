@@ -64,6 +64,15 @@ return packer.startup(function(use)
   -- Useful lua functions used by lots of plugins
   use "nvim-lua/plenary.nvim"
 
+  -- Speeding up startup
+  use({
+    "lewis6991/impatient.nvim",
+    config = function()
+      local impatient = require("impatient")
+      impatient.enable_profile()
+    end,
+  })
+
   -- Dev Icons also required (for me)
   use { "kyazdani42/nvim-web-devicons", config = lua_path"nvim-web-devicons" }
 
@@ -88,14 +97,8 @@ return packer.startup(function(use)
   -- Project management
   use { "ahmedkhalf/project.nvim", config = lua_path"project" }
 
-  -- Speeding up startup
-  use({
-    "lewis6991/impatient.nvim",
-    config = function()
-      local impatient = require("impatient")
-      impatient.enable_profile()
-    end,
-  })
+  -- Smooth scroll
+  use { "karb94/neoscroll.nvim", config = lua_path"neoscroll" }
 
   -- Remove mapping escape delay
   use({
@@ -193,6 +196,18 @@ return packer.startup(function(use)
 
   -- Use as document highlight
   use "RRethy/vim-illuminate"
+
+  -- Code action menu with diff preview
+  -- INFO: Disabled for now. Enable after out of Beta version or if more documentations are added
+  -- INFO: If Enabled remove telescope ui-select as floating code action menu
+  use({
+    "weilbith/nvim-code-action-menu",
+    disable = true,
+    cmd = "CodeActionMenu", -- lazy loaded, only activate plugin when CodeActionMenu initiated
+  })
+
+  -- Code action prompt
+  use{ "kosayoda/nvim-lightbulb", config = lua_path"lightbulb" }
 
   ---------------------
   --    Telescope    --
