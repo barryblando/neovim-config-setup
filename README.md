@@ -51,6 +51,7 @@ npm i -g
 cargo install --locked taplo-cli
 
 brew install hashicorp/tap/terraform-ls
+brew install lua-language-server
 ```
 
 - Install the following, in order for Telescope to work:
