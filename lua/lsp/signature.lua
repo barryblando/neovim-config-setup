@@ -7,7 +7,7 @@ end
 signature.setup {
   -- general options
     -- general options
-  always_trigger = "true",
+  always_trigger = true,
   hint_enable = false, -- virtual text hint
 
   -- floating window
