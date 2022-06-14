@@ -6,11 +6,11 @@
 
 ## Before setting this up... **FORK AT YOUR OWN RISK**
 
-- I use this configurations mainly on my Pengwin distro under WSL2.
+- I use this setup mainly on my Pengwin distro under WSL2.
 
   **Make sure you really know basics of Vim & Neovim.** You can join [@Machine Discord Server](https://discord.gg/6DRHpSRe)
 
-- All plugins & its config are up to date.
+- All plugins are up-to-date.
 
 ## Without further ado Lezzgaw!
 
