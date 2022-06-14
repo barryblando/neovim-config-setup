@@ -179,6 +179,7 @@ return packer.startup(function(use)
   use "tamago324/nlsp-settings.nvim" -- A plugin to configure Neovim LSP using json/yaml files like coc-settings.json
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
   use "folke/lua-dev.nvim" -- full signature help, docs and completion for the nvim lua API
+  use "b0o/schemastore.nvim" -- providing access to the SchemaStore catalog.
 
   -- LSP signature help
   use "ray-x/lsp_signature.nvim"
