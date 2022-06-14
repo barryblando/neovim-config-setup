@@ -1,16 +1,7 @@
-return {
-	settings = {
+local ok_status, luadev = pcall(require, "lua-dev")
 
-		Lua = {
-			diagnostics = {
-				globals = { "vim" },
-			},
-			workspace = {
-				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.stdpath("config") .. "/lua"] = true,
-				},
-			},
-		},
-	},
-}
+if not ok_status then
+  return
+end
+
+return luadev.setup({})
