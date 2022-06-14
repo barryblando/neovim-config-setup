@@ -21,7 +21,9 @@ local servers = {
   "terraformls",
   "taplo",
   "jsonls",
-  "sumneko_lua"
+  "sumneko_lua",
+  "ltex",
+  "emmet_ls"
 }
 
 lsp_installer.setup {
