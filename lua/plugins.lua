@@ -2,6 +2,7 @@ local fn = vim.fn
 
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+-- INFO: ignore lua diagnostic showing warning in fn.glob, not necessary to supply the rest of the arguments
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
     "git",
@@ -175,10 +176,11 @@ return packer.startup(function(use)
 
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
+  use "tamago324/nlsp-settings.nvim" -- A plugin to configure Neovim LSP using json/yaml files like coc-settings.json
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "folke/lua-dev.nvim" -- full signature help, docs and completion for the nvim lua API
 
-  -- Function signature
+  -- LSP signature help
   use "ray-x/lsp_signature.nvim"
 
   -- LSP progress indicator
@@ -194,10 +196,10 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Use as document highlight
+  -- LSP document highlight
   use "RRethy/vim-illuminate"
 
-  -- Code action menu with diff preview
+  -- LSP code action menu with diff preview
   -- INFO: Disabled for now. Enable after out of Beta version or if more documentations are added
   -- INFO: If Enabled remove telescope ui-select as floating code action menu
   use({
@@ -206,7 +208,7 @@ return packer.startup(function(use)
     cmd = "CodeActionMenu", -- lazy loaded, only activate plugin when CodeActionMenu initiated
   })
 
-  -- Code action prompt
+  -- LSP code action prompt
   use{ "kosayoda/nvim-lightbulb", config = lua_path"lightbulb" }
 
   ---------------------
@@ -266,6 +268,8 @@ return packer.startup(function(use)
   -- use "rcarriga/nvim-notify"
   -- use "nvim-pack/nvim-spectre"
   -- use { "michaelb/sniprun", run = "bash ./install.sh" }
+  -- use { "NTBBloodbath/rest.nvim" }
+  -- use { "junegunn/vim-easy-align" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
