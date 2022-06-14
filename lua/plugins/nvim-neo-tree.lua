@@ -136,7 +136,7 @@ neotree.setup({
         if vim.bo.filetype == "neo-tree" then
           -- Neo-tree must be the only window, restore it's status as a sidebar
           local winid = vim.api.nvim_get_current_win()
-          local width = require("neo-tree.utils").get_value(state, "window.width", 40)
+          local width = require("neo-tree.utils").get_value(state, "window.width", 40, false)
           vim.cmd("vsplit " .. path)
           vim.api.nvim_win_set_width(winid, width)
         else
