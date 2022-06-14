@@ -175,6 +175,14 @@ return packer.startup(function(use)
   -- Todo Comments
   use { "folke/todo-comments.nvim", config = lua_path"todo-comments" }
 
+  -- Markdown Previewer
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" }
+  })
+
   ---------------------
   --  COLOR SCHEMES  --
   ---------------------
