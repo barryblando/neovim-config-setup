@@ -222,6 +222,20 @@ return packer.startup(function(use)
   use "folke/lua-dev.nvim" -- full signature help, docs and completion for the nvim lua API
   use "b0o/schemastore.nvim" -- providing access to the SchemaStore catalog.
 
+  -- LSP progress indicator
+  use({
+    "j-hui/fidget.nvim",
+    disable = true,
+    config = function()
+      require("fidget").setup({
+        window = {
+          relative = "editor",
+          blend = 0,
+        },
+      })
+    end,
+  })
+
   -- LSP signature help
   use "ray-x/lsp_signature.nvim"
 
@@ -229,11 +243,8 @@ return packer.startup(function(use)
   use "RRethy/vim-illuminate"
 
   -- LSP code action menu with diff preview
-  -- INFO: Disabled for now. Enable after out of Beta version or if more documentations are added
-  -- INFO: If Enabled remove telescope ui-select as floating code action menu
   use({
     "weilbith/nvim-code-action-menu",
-    disable = true,
     cmd = "CodeActionMenu", -- lazy loaded, only activate plugin when CodeActionMenu initiated
   })
 
@@ -297,6 +308,7 @@ return packer.startup(function(use)
   ---------------------
 
   -- Plugins to Experiment in spare time
+  -- https://github.com/axieax/dotconfig/blob/main/nvim/lua/axie/plugins/init.lua
   -- use "ThePrimeagen/refactoring.nvim"
   -- use "nvim-pack/nvim-spectre"
   -- use { "michaelb/sniprun", run = "bash ./install.sh" }
@@ -304,6 +316,16 @@ return packer.startup(function(use)
   -- use { "junegunn/vim-easy-align" }
   -- use { "kevinhwang91/nvim-bqf", ft = "qf" }
   -- use { "sunjon/stylish.nvim" } -- stylish UI Components for Neovim
+  -- use { "github/copilot.vim" }
+  -- use { "zbirenbaum/copilot-cmp", module = "copilot_cmp" },
+  -- use { "saecki/crates.nvim" }
+  -- use({
+  --     "simrat39/rust-tools.nvim",
+  --     requires = {
+  --       "mfussenegger/nvim-dap",
+  --     },
+  --   }) -- https://sharksforarms.dev/posts/neovim-rust/
+  -- https://github.com/ray-x/go.nvim
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
