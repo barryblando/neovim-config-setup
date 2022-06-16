@@ -16,7 +16,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+--Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "plugins.lua",
   command = "source <afile> | PackerSync",
@@ -39,6 +39,15 @@ packer.init {
   },
 }
 
+local is_wsl = (function()
+  local output = vim.fn.systemlist "uname -r"
+  return not not string.find(output[1] or "", "WSL")
+end)()
+
+-- if is_wsl then
+--   vim.notify("Welcome to Subsytem Linux!")
+-- end
+
 -- Install your plugins here
 return packer.startup(function(use)
   -- Load lua path
@@ -60,13 +69,7 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   -- Speeding up startup
-  use({
-    "lewis6991/impatient.nvim",
-    config = function()
-      local impatient = require("impatient")
-      impatient.enable_profile()
-    end,
-  })
+  use "lewis6991/impatient.nvim"
 
   -- Dev Icons also required (for me)
   use { "kyazdani42/nvim-web-devicons", config = lua_path"nvim-web-devicons" }
@@ -75,12 +78,6 @@ return packer.startup(function(use)
   use { "numToStr/Comment.nvim", config = lua_path"comment" }
 
   -- File Explorer
-  use ({
-    "kyazdani42/nvim-tree.lua",
-    disable = true,
-    config = lua_path"nvim-tree"
-  })
-
   use({
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -175,6 +172,9 @@ return packer.startup(function(use)
   -- Todo Comments
   use { "folke/todo-comments.nvim", config = lua_path"todo-comments" }
 
+  -- Notification
+  use { "rcarriga/nvim-notify", config = lua_path"nvim-notify" }
+
   -- Markdown Previewer
   use({
     "iamcco/markdown-preview.nvim",
@@ -186,26 +186,29 @@ return packer.startup(function(use)
   ---------------------
   --  COLOR SCHEMES  --
   ---------------------
+
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "sainnhe/gruvbox-material"
-
+  
+  -- Color highlighter for Neovim
   use { "norcalli/nvim-colorizer.lua", config = lua_path"colorizer" }
 
   ---------------------
   -- AUTO COMPLETION --
   ---------------------
+
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "hrsh7th/cmp-nvim-lsp" -- nvim-cmp source for neovim's built-in language server client
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
 
   ---------------------
   --    SNIPPETS     --
   ---------------------
 
-  use "L3MON4D3/LuaSnip" --snippet engine
+  use "L3MON4D3/LuaSnip" -- snippet engine, requires cmp_luasnip in order to work
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   ---------------------
@@ -222,19 +225,6 @@ return packer.startup(function(use)
   -- LSP signature help
   use "ray-x/lsp_signature.nvim"
 
-  -- LSP progress indicator
-  use({
-    "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup({
-        window = {
-          relative = "editor",
-          blend = 0,
-        },
-      })
-    end,
-  })
-
   -- LSP document highlight
   use "RRethy/vim-illuminate"
 
@@ -249,6 +239,9 @@ return packer.startup(function(use)
 
   -- LSP code action prompt
   use{ "kosayoda/nvim-lightbulb", config = lua_path"lightbulb" }
+
+  -- Renamer
+  use { "filipdutescu/renamer.nvim", branch = "master", config = lua_path"renamer" }
 
   ---------------------
   --    Telescope    --
@@ -269,6 +262,7 @@ return packer.startup(function(use)
   use { "p00f/nvim-ts-rainbow" }
   use { "windwp/nvim-autopairs", config = lua_path"nvim-autopairs" }
   use { "windwp/nvim-ts-autotag" }
+  use { "nvim-treesitter/nvim-treesitter-context" }
 
   -- Treesitter text dimming
   use({
@@ -304,11 +298,12 @@ return packer.startup(function(use)
 
   -- Plugins to Experiment in spare time
   -- use "ThePrimeagen/refactoring.nvim"
-  -- use "rcarriga/nvim-notify"
   -- use "nvim-pack/nvim-spectre"
   -- use { "michaelb/sniprun", run = "bash ./install.sh" }
   -- use { "NTBBloodbath/rest.nvim" }
   -- use { "junegunn/vim-easy-align" }
+  -- use { "kevinhwang91/nvim-bqf", ft = "qf" }
+  -- use { "sunjon/stylish.nvim" } -- stylish UI Components for Neovim
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
