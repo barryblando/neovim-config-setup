@@ -6,15 +6,19 @@ end
 
 signature.setup {
   -- general options
-    -- general options
-  always_trigger = true,
+  always_trigger = false,
   hint_enable = false, -- virtual text hint
+  bind = true,
 
   -- floating window
+
   padding = " ",
+  auto_close_after = 200,
   transparency = nil,
+  floating_window_above_cur_line = true,
   handler_opts = {
     border = { "┏", "━", "┓", "┃", "┛","━", "┗", "┃" },
   },
+  max_width = 80,
 }
 
