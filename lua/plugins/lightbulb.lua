@@ -11,7 +11,7 @@ require("nvim-lightbulb").setup({
   },
   virtual_text = {
     enabled = true,
-    text = "💡suggestions available.",
+    text = "💡",
     hl_mode = "combine",
   },
   status_text = {
