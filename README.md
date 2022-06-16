@@ -74,6 +74,8 @@ brew install lua-language-server
 
 ## Sources
 
+- [Neovim LSP Doc](https://neovim.io/doc/user/lsp.html)
+- [Neovim Diagnostic Doc](https://neovim.io/doc/user/diagnostic.html)
 - [LSP Configuration List](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 - [Terraform LS Installation](https://github.com/hashicorp/terraform-ls/blob/main/docs/installation.md)
 
