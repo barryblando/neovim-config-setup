@@ -1,3 +1,13 @@
+local colorscheme = "gruvbox-material"
+local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+
+if not status_ok then
+  vim.notify(colorscheme .. " not detected on first boot. Restart Neovim after all plugins are installed. Ignore this message. Thank you!", "info", {
+    title = "ColorScheme"
+  })
+  return
+end
+
 -- Gruvbox Config
 vim.cmd [[
   " Important!! https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt
