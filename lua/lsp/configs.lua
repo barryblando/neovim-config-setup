@@ -22,7 +22,7 @@ local servers = {
   "taplo",
   "jsonls",
   "sumneko_lua",
-  "ltex",
+  "marksman",
   "emmet_ls"
 }
 
