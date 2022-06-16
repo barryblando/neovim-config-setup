@@ -126,7 +126,7 @@ lualine.setup({
       left = icons.ui.TriangleRight,
       right = icons.ui.TriangleLeft
     },
-		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+		disabled_filetypes = { "alpha", "dashboard", "Outline" },
 		always_divide_middle = true,
     globalstatus = true
 	},
@@ -150,7 +150,5 @@ lualine.setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = {
-    "nvim-tree"
-  }
+	extensions = {}
 })
