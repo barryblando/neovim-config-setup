@@ -43,7 +43,7 @@ M.setup = function()
       local buf, winnr = handler(...)
       if buf then
         -- use the same transparency effect from cmp
-        vim.api.nvim_win_set_option(winnr, 'winhighlight', 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None')
+        vim.api.nvim_win_set_option(winnr, 'winhighlight', 'Normal:NormalFloat')
       end
     end, overrides)
   end
@@ -98,32 +98,18 @@ M.setup = function()
   vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float()]]
 end
 
--- local function lsp_highlight_document(client)
---   -- Set autocommands conditional on server_capabilities
---   if client.resolved_capabilities.document_highlight then
---     vim.api.nvim_exec(
---       [[
---       hi! link LspReferenceRead Visual
---       hi! link LspReferenceText Visual
---       hi! link LspReferenceWrite Visual
---       augroup lsp_document_highlight
---         autocmd! * <buffer>
---         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
---         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
---       augroup END
---     ]],
---       false
---     )
---   end
--- end
-
 local function lsp_highlight_document(client)
   -- If you are on Neovim v0.8, use client.server_capabilities.documentHighlightProvider
-  if client.server_capabilities.document_highlight then
+  if client.resolved_capabilities.document_highlight then
     local status_ok, illuminate = pcall(require, "illuminate")
     if not status_ok then
       return
     end
+    vim.api.nvim_exec([[
+      hi! link LspReferenceRead Visual
+      hi! link LspReferenceText Visual
+      hi! link LspReferenceWrite Visual
+    ]], false)
     illuminate.on_attach(client)
   end
 end
@@ -141,7 +127,7 @@ local function lsp_keymaps(bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
