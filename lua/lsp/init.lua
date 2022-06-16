@@ -7,3 +7,4 @@ require "lsp.configs"
 require("lsp.handlers").setup()
 require "lsp.null-ls"
 require "lsp.signature"
+require "lsp.progress-notification"
