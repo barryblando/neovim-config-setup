@@ -47,9 +47,11 @@ npm i -g
   typescript typescript-language-server
   graphql-language-service-cli
   @prisma/language-server
+  @ansible/ansible-language-server
   emmet-ls
 
 cargo install --locked taplo-cli
+cargo install stylua
 
 brew install hashicorp/tap/terraform-ls
 brew install lua-language-server
