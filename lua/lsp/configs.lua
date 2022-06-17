@@ -23,7 +23,8 @@ local servers = {
   "jsonls",
   "sumneko_lua",
   "marksman",
-  "emmet_ls"
+  "emmet_ls",
+  "ansiblels",
 }
 
 lsp_installer.setup {
