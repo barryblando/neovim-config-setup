@@ -99,7 +99,7 @@ M.setup = function()
 end
 
 local function lsp_highlight_document(client)
-  -- If you are on Neovim v0.8, use client.server_capabilities.documentHighlightProvider
+  -- INFO: If you are on Neovim v0.8, use client.server_capabilities.documentHighlightProvider
   if client.resolved_capabilities.document_highlight then
     local status_ok, illuminate = pcall(require, "illuminate")
     if not status_ok then
