@@ -69,7 +69,12 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   -- Speeding up startup
-  use "lewis6991/impatient.nvim"
+  use { 
+    "lewis6991/impatient.nvim",
+    config = function ()
+      require'impatient'.enable_profile()
+    end
+  }
 
   -- Dev Icons also required (for me)
   use { "kyazdani42/nvim-web-devicons", config = lua_path"nvim-web-devicons" }
