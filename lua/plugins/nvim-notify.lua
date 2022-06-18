@@ -4,7 +4,7 @@ if not status_ok then
   return
 end
 
-local icons = require "plugins.icons"
+local icons = require "utils.icons"
 
 notify.setup {
   -- Animation style (see below for details)
