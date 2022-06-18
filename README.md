@@ -80,8 +80,3 @@ brew install lua-language-server
 - [Neovim Diagnostic Doc](https://neovim.io/doc/user/diagnostic.html)
 - [LSP Configuration List](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 - [Terraform LS Installation](https://github.com/hashicorp/terraform-ls/blob/main/docs/installation.md)
-
-## TODO
-
-- add winbar w/ gps soon if neovim 0.8 gets stable release
-- remove gps in lualine for winbar 
