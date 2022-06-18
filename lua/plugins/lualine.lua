@@ -1,15 +1,10 @@
 local status_ok, lualine = pcall(require, "lualine")
-local gps_status_ok, gps = pcall(require, "nvim-gps")
 
 if not status_ok then
-  return
+	return
 end
 
-if not gps_status_ok then
-  return
-end
-
-local icons = require "plugins.icons"
+local icons = require("utils.icons")
 
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
@@ -26,30 +21,30 @@ local diagnostics = {
 }
 
 local diff = {
-  "diff",
-  colored = false,
-  diff_color = {
-    -- Same color values as the general color option can be used here.
-    adadded  = 'DiffAdd',    -- Changes the diff's added color
-    modified = 'DiffChange', -- Changes the diff's modified color
-    removed  = 'DiffDelete', -- Changes the diff's removed color you
-  },
-  symbols = {
-    added = icons.git.Add,
-    modified = icons.git.Mod,
-    removed = icons.git.Remove
-  }, -- Changes the symbols used by the diff.
-  source = function ()
-    local gitsigns = vim.b.gitsigns_status_dict
-    if gitsigns then
-      return {
-        added = gitsigns.added,
-        modified = gitsigns.changed,
-        removed = gitsigns.removed
-      }
-    end
-  end,
-  cond = hide_in_width
+	"diff",
+	colored = false,
+	diff_color = {
+		-- Same color values as the general color option can be used here.
+		adadded = "DiffAdd", -- Changes the diff's added color
+		modified = "DiffChange", -- Changes the diff's modified color
+		removed = "DiffDelete", -- Changes the diff's removed color you
+	},
+	symbols = {
+		added = icons.git.Add,
+		modified = icons.git.Mod,
+		removed = icons.git.Remove,
+	}, -- Changes the symbols used by the diff.
+	source = function()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns then
+			return {
+				added = gitsigns.added,
+				modified = gitsigns.changed,
+				removed = gitsigns.removed,
+			}
+		end
+	end,
+	cond = hide_in_width,
 }
 
 local mode = {
@@ -60,28 +55,24 @@ local mode = {
 }
 
 local filetype = {
-  "filetype",
-  colored = true,   -- Displays filetype icon in color if set to true
-  icon_only = false, -- Display only an icon for filetype
-  icon = { align = 'left' }, -- Display filetype icon on the right hand side
-  -- icon =    {'X', align='right'}
-  -- Icon string ^ in table is ignored in filetype component
+	"filetype",
+	colored = true, -- Displays filetype icon in color if set to true
+	icon_only = false, -- Display only an icon for filetype
+	icon = { align = "left" }, -- Display filetype icon on the right hand side
+	-- icon =    {'X', align='right'}
+	-- Icon string ^ in table is ignored in filetype component
 }
 
 local filename = {
-  'filename',
-  file_status = true,      -- Displays file status (readonly status, modified status)
-  path = 2,                -- 0: Just the filename
-                           -- 1: Relative path
-                           -- 2: Absolute path
-                           -- 3: Absolute path, with tilde as the home directory
-  shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
-                           -- for other components. (terrible name, any suggestions?)
-  symbols = {
-    modified = '[+]',      -- Text to show when the file is modified.
-    readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-    unnamed = '[No Name]', -- Text to show for unnamed buffers.
-  }
+	"filename",
+	file_status = true, -- Displays file status (readonly status, modified status)
+	path = 2, -- 0: Just the filename, 1: Relative path, 2: Absolute path, 3: Absolute path, with tilde as the home directory
+	shorting_target = 40, -- Shortens path to leave 40 spaces in the window, for other components. (terrible name, any suggestions?)
+	symbols = {
+		modified = "[+]", -- Text to show when the file is modified.
+		readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+		unnamed = "[No Name]", -- Text to show for unnamed buffers.
+	},
 }
 
 local branch = {
@@ -93,9 +84,9 @@ local branch = {
 local location = {
 	"location",
 	padding = 0,
-  fmt = function(str)
-    return "" .. str .. " "
-  end,
+	fmt = function(str)
+		return " " .. str .. " "
+	end,
 }
 
 -- cool function for progress
@@ -118,28 +109,26 @@ lualine.setup({
 		-- theme = require("user.lualineTheme").theme(),
 		theme = "auto",
 		-- component_separators = { left = "", right = "" },
-    component_separators = {
-      left = "",
-      right = ""
-    },
+		component_separators = {
+			left = "",
+			right = "",
+		},
 		section_separators = {
-      left = icons.ui.TriangleRight,
-      right = icons.ui.TriangleLeft
-    },
+			left = icons.ui.TriangleRight,
+			right = icons.ui.TriangleLeft,
+		},
 		disabled_filetypes = { "alpha", "dashboard", "Outline" },
 		always_divide_middle = true,
-    globalstatus = true
+		globalstatus = true,
 	},
 	sections = {
 		lualine_a = { mode },
 		lualine_b = { branch, diff },
-		lualine_c = {
-      { gps.get_location, cond = gps.is_available }
-    },
+		lualine_c = {},
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diagnostics, spaces, "encoding", filetype },
 		lualine_y = { location },
-	  lualine_z = { progress },
+		lualine_z = { progress },
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -150,5 +139,7 @@ lualine.setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = {}
+	extensions = {
+		"neo-tree",
+	},
 })
