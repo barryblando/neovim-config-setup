@@ -6,30 +6,30 @@ end
 local lspconfig = require("lspconfig")
 
 local servers = {
-  "bashls",
-  "denols",
-  "dockerls",
-  "html",
-  "gopls",
-  "graphql",
-  "prismals",
-  "rust_analyzer",
-  "tailwindcss",
-  "yamlls",
-  "cssls",
-  "tsserver",
-  "terraformls",
-  "taplo",
-  "jsonls",
-  "sumneko_lua",
-  "marksman",
-  "emmet_ls",
-  "ansiblels",
+	"bashls",
+	"denols",
+	"dockerls",
+	"html",
+	"gopls",
+	"graphql",
+	"prismals",
+	"rust_analyzer",
+	"tailwindcss",
+	"yamlls",
+	"cssls",
+	"tsserver",
+	"terraformls",
+	"taplo",
+	"jsonls",
+	"sumneko_lua",
+	"marksman",
+	"emmet_ls",
+	"ansiblels",
 }
 
-lsp_installer.setup {
-	ensure_installed = servers
-}
+lsp_installer.setup({
+	ensure_installed = servers,
+})
 
 for _, server in pairs(servers) do
 	local opts = {
@@ -38,7 +38,7 @@ for _, server in pairs(servers) do
 	}
 	local has_custom_opts, server_custom_opts = pcall(require, "lsp.settings." .. server)
 	if has_custom_opts then
-	 	opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
+		opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
 	end
 	lspconfig[server].setup(opts)
 end
