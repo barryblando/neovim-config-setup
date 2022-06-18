@@ -1,48 +1,48 @@
 local M = {}
 M.theme = function()
-    local colors = {
-        darkgray = "#16161d",
-        gray = "#727169",
-        innerbg = nil,
-        outerbg = "#16161D",
-        normal = "#7e9cd8",
-        insert = "#98bb6c",
-        visual = "#ffa066",
-        replace = "#e46876",
-        command = "#e6c384",
-        white = "#ffffff"
-    }
-    return {
-        inactive = {
-            a = { fg = colors.gray, bg = colors.outerbg, gui = "bold" },
-            b = { fg = colors.gray, bg = colors.outerbg },
-            c = { fg = colors.white, bg = colors.innerbg },
-        },
-        visual = {
-            a = { fg = colors.darkgray, bg = colors.visual, gui = "bold" },
-            b = { fg = colors.gray, bg = colors.outerbg },
-            c = { fg = colors.white, bg = colors.innerbg },
-        },
-        replace = {
-            a = { fg = colors.darkgray, bg = colors.replace, gui = "bold" },
-            b = { fg = colors.gray, bg = colors.outerbg },
-            c = { fg = colors.white, bg = colors.innerbg },
-        },
-        normal = {
-            a = { fg = colors.darkgray, bg = colors.normal, gui = "bold" },
-            b = { fg = colors.gray, bg = colors.outerbg },
-            c = { fg = colors.white, bg = colors.innerbg },
-        },
-        insert = {
-            a = { fg = colors.darkgray, bg = colors.insert, gui = "bold" },
-            b = { fg = colors.gray, bg = colors.outerbg },
-            c = { fg = colors.white, bg = colors.innerbg },
-        },
-        command = {
-            a = { fg = colors.darkgray, bg = colors.command, gui = "bold" },
-            b = { fg = colors.gray, bg = colors.outerbg },
-            c = { fg = colors.white, bg = colors.innerbg },
-        },
-    }
+	local colors = {
+		black = "#282828",
+		white = "#ebdbb2",
+		red = "#fb4934",
+		green = "#b8bb26",
+		blue = "#83a598",
+		yellow = "#fe8019",
+		gray = "#a89984",
+		darkgray = "#3c3836",
+		lightgray = "#504945",
+		inactivegray = "#7c6f64",
+	}
+	return {
+		normal = {
+			a = { bg = colors.gray, fg = colors.black, gui = "bold" },
+			b = { bg = colors.lightgray, fg = colors.white },
+			c = { bg = colors.darkgray, fg = colors.gray },
+		},
+		insert = {
+			a = { bg = colors.blue, fg = colors.black, gui = "bold" },
+			b = { bg = colors.lightgray, fg = colors.white },
+			c = { bg = colors.lightgray, fg = colors.white },
+		},
+		visual = {
+			a = { bg = colors.yellow, fg = colors.black, gui = "bold" },
+			b = { bg = colors.lightgray, fg = colors.white },
+			c = { bg = colors.inactivegray, fg = colors.black },
+		},
+		replace = {
+			a = { bg = colors.red, fg = colors.black, gui = "bold" },
+			b = { bg = colors.lightgray, fg = colors.white },
+			c = { bg = colors.black, fg = colors.white },
+		},
+		command = {
+			a = { bg = colors.green, fg = colors.black, gui = "bold" },
+			b = { bg = colors.lightgray, fg = colors.white },
+			c = { bg = colors.inactivegray, fg = colors.black },
+		},
+		inactive = {
+			a = { bg = colors.darkgray, fg = colors.gray, gui = "bold" },
+			b = { bg = colors.darkgray, fg = colors.gray },
+			c = { bg = colors.darkgray, fg = colors.gray },
+		},
+	}
 end
 return M
