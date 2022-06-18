@@ -15,7 +15,7 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
-local icons = require "plugins.icons"
+local icons = require "utils.icons"
 
 local kind_icons = icons.kind
 
