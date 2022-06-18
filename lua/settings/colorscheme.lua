@@ -2,14 +2,19 @@ local colorscheme = "gruvbox-material"
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
 if not status_ok then
-  vim.notify(colorscheme .. " not detected on first boot. Restart Neovim after all plugins are installed. Ignore this message. Thank you!", "info", {
-    title = "ColorScheme"
-  })
-  return
+	vim.notify(
+		colorscheme
+			.. " not detected on first boot. Restart Neovim after all plugins are installed. Ignore this message. Thank you!",
+		"info",
+		{
+			title = "ColorScheme",
+		}
+	)
+	return
 end
 
 -- Gruvbox Config
-vim.cmd [[
+vim.cmd([[
   " Important!! https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt
   if has('termguicolors')
     set termguicolors
@@ -32,13 +37,13 @@ vim.cmd [[
   let g:gruvbox_material_enable_italic = 1
   
   colorscheme gruvbox-material
-]]
+]])
 
 -- Set bufferline bg transparent
-vim.cmd [[ highlight BufferLineFill guibg=NONE ]]
+vim.cmd([[ highlight TabLineFill guibg=NONE ]])
 
 -- Hide non-text from buffers i.e ~ (tilde)
-vim.cmd [[ set fillchars=eob:\ ]]
+vim.cmd([[ set fillchars=eob:\ ]])
 
 -- Set statusline in nvim_tree transparent
 vim.cmd([[
