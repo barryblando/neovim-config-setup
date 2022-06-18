@@ -76,7 +76,7 @@ local components = {
 		style = function(buffer)
 			return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and "bold,italic")
 				or (buffer.is_focused and "bold,italic")
-				or (buffer.diagnostics.errors ~= 0 and "italic")
+				or (buffer.diagnostics.errors ~= 0 and "bold")
 				or nil
 		end,
 		truncation = {
