@@ -43,6 +43,10 @@ local function format_message(message, percentage)
 	return (percentage and percentage .. "%\t" or "") .. (message or "")
 end
 
+-------------------
+-- LSP integration
+-------------------
+
 vim.lsp.handlers["$/progress"] = function(_, result, ctx)
 	local client_id = ctx.client_id
 
