@@ -52,9 +52,42 @@ M.setup = function()
 		end, overrides)
 	end
 
+	-- Go-to definition in a split window
+	local function goto_definition(split_cmd)
+		local util = vim.lsp.util
+		local log = require("vim.lsp.log")
+		local api = vim.api
+
+		-- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
+		local handler = function(_, result, ctx)
+			if result == nil or vim.tbl_isempty(result) then
+				local _ = log.info() and log.info(ctx.method, "No location found")
+				return nil
+			end
+
+			if split_cmd then
+				vim.cmd(split_cmd)
+			end
+
+			if vim.tbl_islist(result) then
+				util.jump_to_location(result[1])
+
+				if #result > 1 then
+					util.setqflist(util.locations_to_items(result))
+					api.nvim_command("copen")
+					api.nvim_command("wincmd p")
+				end
+			else
+				util.jump_to_location(result)
+			end
+		end
+		return handler
+	end
+
 	-- https://neovim.io/doc/user/lsp.html
 	vim.lsp.handlers["textDocument/hover"] = custom_handler(vim.lsp.handlers.hover)
 	vim.lsp.handlers["textDocument/signatureHelp"] = custom_handler(vim.lsp.handlers.signature_help)
+	vim.lsp.handlers["textDocument/definition"] = goto_definition("split")
 
 	-- wrapped open_float to inspect diagnostics and use the severity color for border
 	-- https://neovim.discourse.group/t/lsp-diagnostics-how-and-where-to-retrieve-severity-level-to-customise-border-color/1679
@@ -149,7 +182,7 @@ local function lsp_keymaps(bufnr)
 end
 
 ------------------------
---  SYNC FORMATTING   --
+--     FORMATTING     --
 ------------------------
 
 local lsp_formatting = function(bufnr)
@@ -166,6 +199,7 @@ end
 --  ASYNC FORMATTING  --
 ------------------------
 
+-- WARN: Enable async_formatting if you prefer it but does not guarantee reliability, use with caution.
 local async_formatting = function(bufnr)
 	bufnr = bufnr or vim.api.nvim_get_current_buf()
 
@@ -218,14 +252,23 @@ M.on_attach = function(client, bufnr)
 			group = augroup,
 			buffer = bufnr,
 			callback = function()
-				-- NOTE: The most reliable way to format files on save is to use a sync formatting method
+				-- NOTE: This is the most reliable way to format files on save
 				lsp_formatting(bufnr)
-				-- INFO: Enable async_formatting if you prefer it but does not guarantee reliability, use with caution.
 				-- async_formatting(bufnr)
 			end,
 		})
 	end
 
+  local client_to_skip = "dockerls cssls" -- clients that navic doesn't support
+  if client_to_skip:find(client.name) then
+			goto continue
+	end
+
+  if client.supports_method("textDocument/documentSymbol") then
+		require("nvim-navic").attach(client, bufnr) -- in order for nvim-navic to work
+	end
+
+  ::continue::
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end
