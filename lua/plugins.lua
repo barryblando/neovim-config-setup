@@ -234,20 +234,6 @@ return packer.startup(function(use)
 	use("folke/lua-dev.nvim") -- full signature help, docs and completion for the nvim lua API
 	use("b0o/schemastore.nvim") -- providing access to the SchemaStore catalog.
 
-	-- LSP progress indicator
-	use({
-		"j-hui/fidget.nvim",
-		disable = true,
-		config = function()
-			require("fidget").setup({
-				window = {
-					relative = "editor",
-					blend = 0,
-				},
-			})
-		end,
-	})
-
 	-- LSP signature help
 	use("ray-x/lsp_signature.nvim")
 
@@ -265,6 +251,9 @@ return packer.startup(function(use)
 
 	-- Renamer
 	use({ "filipdutescu/renamer.nvim", branch = "master", config = lua_path("renamer") })
+
+	-- show current code context in winbar
+	use({ "SmiteshP/nvim-navic", config = lua_path("nvim-navic") })
 
 	---------------------
 	--    Telescope    --
@@ -306,9 +295,6 @@ return packer.startup(function(use)
 		end,
 	})
 
-	-- code structure "breadcrumb"
-	use({ "SmiteshP/nvim-gps", config = lua_path("nvim-gps") })
-
 	---------------------
 	--      GIT        --
 	---------------------
@@ -328,8 +314,6 @@ return packer.startup(function(use)
 	-- use { "junegunn/vim-easy-align" }
 	-- use { "kevinhwang91/nvim-bqf", ft = "qf" }
 	-- use { "sunjon/stylish.nvim" } -- stylish UI Components for Neovim
-	-- use { "github/copilot.vim" }
-	-- use { "zbirenbaum/copilot-cmp", module = "copilot_cmp" },
 	-- use { "saecki/crates.nvim" }
 	-- use({
 	--     "simrat39/rust-tools.nvim",
