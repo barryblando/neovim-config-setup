@@ -147,6 +147,7 @@ else
 			String = " ",
 			Boolean = " ",
 			Object = " ",
+			Null = "ﳠ ",
 		},
 		documents = {
 			File = " ",
