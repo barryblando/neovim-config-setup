@@ -22,6 +22,9 @@ neotree.setup({
 	enable_git_status = true,
 	enable_diagnostics = true,
 	default_component_configs = {
+		container = {
+			enable_character_fade = true,
+		},
 		indent_size = 1,
 		name = {
 			trailing_slash = true,
