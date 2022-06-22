@@ -49,12 +49,15 @@ npm i -g
   @prisma/language-server
   @ansible/ansible-language-server
   emmet-ls
+  prettier
 
 cargo install --locked taplo-cli
 cargo install stylua
 
 brew install hashicorp/tap/terraform-ls
 brew install lua-language-server
+brew install bufbuild/buf/buf
+brew install hadolint
 ```
 
 - Install the following, in order for Telescope to work:
@@ -80,3 +83,5 @@ brew install lua-language-server
 - [Neovim Diagnostic Doc](https://neovim.io/doc/user/diagnostic.html)
 - [LSP Configuration List](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 - [Terraform LS Installation](https://github.com/hashicorp/terraform-ls/blob/main/docs/installation.md)
+- [Null-LS BUILTIN](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md)
+- [Null-LS BUILTIN_CONFIG](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md)
