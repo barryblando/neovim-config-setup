@@ -1,4 +1,4 @@
-# WSL2 NEOVIM CONFIG
+# WSL2 NEOVIM CONFIG (ARCHIVED) UPDATE: [.dotfiles](https://github.com/barryblando/dotfiles)
 
 ![screenshot](https://user-images.githubusercontent.com/5582213/174443676-7c273753-c1de-4731-bef8-bd3c1aaf590d.png)
 
